@@ -27,6 +27,7 @@ const userSlice = createSlice({
 
   
 })
+export const getName=(state)=>state.user.nameVal;
 
 export const { nameHandler,emailHandler,passHandler } = userSlice.actions
 export default userSlice.reducer
