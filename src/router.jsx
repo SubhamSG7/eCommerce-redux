@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import axios from "axios";
-import Home from "./Pages/Cart";
+import Home from "./Pages/Home";
 import Wrapper from "./components/Wrapper";
 import Blog from "./Pages/Blog";
 import Contact from "./Pages/Contact";
