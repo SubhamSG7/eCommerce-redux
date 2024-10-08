@@ -6,6 +6,8 @@ export default function Product() {
   
   return (
     <div className='flex flex-wrap gap-4 justify-center  my-5'>
+      product page
+      
       {/* {data.map((item)=> <ProductPreview item={item}/>)} */}
     </div>
   )

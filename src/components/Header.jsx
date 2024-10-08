@@ -24,6 +24,7 @@ const Navbar = () => {
   };
 
   return (
+
     <div className='bg-cyan-500 flex justify-between items-center h-24 max-w-full mx-auto px-4 text-white'>
       <h1 className='w-full text-3xl font-bold text-white'>Ecommerce</h1>
 
@@ -62,6 +63,7 @@ const Navbar = () => {
         ))}
       </ul>
     </div>
+
   );
 };
 

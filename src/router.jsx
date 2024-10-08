@@ -11,6 +11,7 @@ import SingleProduct from "./Pages/SingleProduct";
 import SingleBlog from "./Pages/SingleBlog";
 import ProductLayout from "./components/ProductLayout";
 import BlogLayout from "./components/BlogLayout";
+import Signup from "./components/SignUp";
 
 async function fetchProducts(url) {
   try {
@@ -39,9 +40,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
-        loader: () =>
-          fetchProducts("https://fakestoreapi.com/products?limit=4"),
+        element: <Home />
       },
       {
         path: "/blog",
@@ -50,12 +49,11 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Blog />,
-            loader:()=> fetchProducts("https://jsonplaceholder.typicode.com/posts")
           },
           {
             path: ":id",
-            element: <SingleBlog />,
-           loader: (id)=>fetchSingleProduct(id,"https://jsonplaceholder.typicode.com/posts/"),
+            element: <SingleBlog />
+         
           },
         ],
       },
@@ -70,21 +68,23 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Product />,
-            loader: () =>
-              fetchProducts("https://fakestoreapi.com/products"),
+            element: <Product />
+          
           },
           {
             path: ":id",
             element: <SingleProduct />,
-            loader: (id) =>
-            fetchSingleProduct(id,"https://fakestoreapi.com/products/"),
+      
           },
         ],
       },
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
       },
     ],
   },
