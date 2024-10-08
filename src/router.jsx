@@ -11,7 +11,7 @@ import SingleProduct from "./Pages/SingleProduct";
 import SingleBlog from "./Pages/SingleBlog";
 import ProductLayout from "./components/ProductLayout";
 import BlogLayout from "./components/BlogLayout";
-import Signup from "./components/Signup";
+import Signup from "./components/SignUp";
 
 async function fetchProducts(url) {
   try {
