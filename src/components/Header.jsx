@@ -23,6 +23,7 @@ export default function Header() {
 
          <option value="a">data</option>
         </select>
+          <Link to="/signup" className="bg-gray-500 text-white px-6 py-2">SignUp</Link>
       </nav>
     </header>
   );
