@@ -1,4 +1,6 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
+import { fetchData,fetchBlog } from '../actions/actions';
+
 
 
 
@@ -7,14 +9,14 @@ import { createSlice, configureStore } from '@reduxjs/toolkit'
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    cart:[] 
-
+    cart:[], 
+    loading:false,
+    error:null,
   },
-  reducers: {
-    
-  },
+  reducers: {},
 
-  
+
+
 })
 
 // export const { incremented, decremented } = cartSlice.actions
