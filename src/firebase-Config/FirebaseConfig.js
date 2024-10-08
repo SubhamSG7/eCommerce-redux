@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 
 const apikey=import.meta.env.VITE_APIKEY
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey:apikey ,
   authDomain: "ecommerce-64211.firebaseapp.com",
   projectId: "ecommerce-64211",
@@ -12,4 +12,4 @@ const firebaseConfig = {
   databaseURL:"https://ecommerce-64211-default-rtdb.firebaseio.com/"
 };
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
