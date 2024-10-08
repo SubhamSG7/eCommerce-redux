@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import axios from "axios";
-import Home from "./Pages/Cart";
+import Home from "./Pages/Home";
 import Wrapper from "./components/Wrapper";
 import Blog from "./Pages/Blog";
 import Contact from "./Pages/Contact";
@@ -39,9 +39,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
-        loader: () =>
-          fetchProducts("https://fakestoreapi.com/products?limit=4"),
+        element: <Home />
       },
       {
         path: "/blog",
@@ -50,12 +48,11 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Blog />,
-            loader:()=> fetchProducts("https://jsonplaceholder.typicode.com/posts")
           },
           {
             path: ":id",
-            element: <SingleBlog />,
-           loader: (id)=>fetchSingleProduct(id,"https://jsonplaceholder.typicode.com/posts/"),
+            element: <SingleBlog />
+         
           },
         ],
       },
@@ -70,21 +67,23 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Product />,
-            loader: () =>
-              fetchProducts("https://fakestoreapi.com/products"),
+            element: <Product />
+          
           },
           {
             path: ":id",
             element: <SingleProduct />,
-            loader: (id) =>
-            fetchSingleProduct(id,"https://fakestoreapi.com/products/"),
+      
           },
         ],
       },
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
       },
     ],
   },
