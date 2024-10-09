@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { currencyChange } from '../slices/currencySlice';
+import HashLoader from "react-spinners/HashLoader";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCurrency } from '../actions/actions';
+
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -11,10 +16,10 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { id: 1, text: 'SignUp', nav: "/SignUp" },
+    { id: 1, text: 'SignUp', nav: "/signUp" },
     { id: 2, text: 'Cart', nav: "/cart" },
-    { id: 3, text: 'Blog', nav: "/Blog" },
-    { id: 4, text: 'Contact', nav: "/ContactUs" },
+    { id: 3, text: 'Blog', nav: "/blog" },
+    { id: 4, text: 'Contact', nav: "/contact" },
     { id: 5, text: 'Products', nav: "/products" },
   ];
 
@@ -22,6 +27,48 @@ const Navbar = () => {
     navigate(navPath);
     setNav(false);
   };
+
+
+//////////////////////////////////
+
+const dispatch = useDispatch();
+
+const {currencyData,error,loading} = useSelector((state)=>state.currency);
+
+const currentCurrency = useSelector((state)=>state.currency.currentCurrencyName)
+
+
+useEffect(()=>{
+  dispatch(fetchCurrency())
+  
+},[dispatch])
+
+
+
+if (loading) return <div className='h-[100vh] flex justify-center items-center'> <HashLoader
+color="green"
+loading={loading}
+size={150}
+aria-label="Loading Spinner"
+data-testid="loader"
+/></div>;
+if (error) return <div>Error: {error}</div>;
+
+
+const availableCurrency =  currencyData.conversion_rates ? Object.keys(currencyData.conversion_rates): [] 
+
+
+function currencyHandler(e) {
+dispatch(currencyChange(e.target.value));
+}
+
+
+
+//////////////////////////////////
+
+
+
+
 
   return (
 
@@ -62,6 +109,15 @@ const Navbar = () => {
           </li>
         ))}
       </ul>
+      <select
+          name="currency"
+          className="bg-black px-4 rounded cursor-pointer bg-cyan-500 border border-white px-4 text-white py-2"
+          onChange={currencyHandler}
+          value={currentCurrency}
+     
+        >
+            {availableCurrency.map((item,index)=> <option key={index} value={item}>{item}</option>)}
+        </select>
     </div>
 
   );
