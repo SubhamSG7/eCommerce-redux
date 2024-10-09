@@ -29,7 +29,9 @@ export default function SingleProductCard({ item }) {
         <div>
         <span className='text-green-800 font-bold '>Price After Discount : </span>{((item?.price-item.discount) * currentCurrencyPrice).toFixed(2)} <span className="text-green-900">{currentCurrencyName}</span>
         </div>
-        {item.quantity ? (
+   
+      </>) : (<><span className='line-through text-red-800 font-bold '>Price : </span>{(item?.price * currentCurrencyPrice).toFixed(2)} <span className="text-red-900">{currentCurrencyName}</span></>)}</p>
+      {item.quantity ? (
         <ButtonPlusMinus item={item} />
       ) : data ? (
         <button className="px-6 py-2 text-white bg-red-900 rounded" disabled>
@@ -43,7 +45,6 @@ export default function SingleProductCard({ item }) {
           Add To Cart
         </button>
       )}
-      </>) : (<><span className='line-through text-red-800 font-bold '>Price : </span>{(item?.price * currentCurrencyPrice).toFixed(2)} <span className="text-red-900">{currentCurrencyName}</span></>)}</p>
         </div>
         <div>
 

@@ -38,7 +38,7 @@ function Login() {
           } else {
             console.log('No user data found');
           }
-          // navigate("/")
+          navigate("/")
         }
       } catch (error) {
         console.error('Login error:', error.message)
@@ -64,7 +64,7 @@ function Login() {
   </div>
 
   <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form className="space-y-6" action="#" method="POST">
+    <form className="space-y-6"  method="POST">
       <div>
         <label for="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
         <div className="mt-2">
