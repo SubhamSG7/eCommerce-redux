@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchSingleBlog, fetchSingleProduct } from '../actions/actions';
 import HashLoader from "react-spinners/HashLoader";
-// import SingleBlogCard from '../components/SingleBlogCard';
+import SingleBlogCard from '../components/SingleBlogCard';
 
 
 export default function SingleBlog() {
