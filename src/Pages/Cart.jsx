@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Card from '../components/Card';
+import { Link } from 'react-router-dom';
 
 export default function Cart() {
   const {currentCurrencyName,currentCurrencyPrice} = useSelector((state)=>state.currency)
@@ -38,14 +39,22 @@ export default function Cart() {
                 <div className="border-t mt-4 pt-2">
 
                   <h3 className="text-xl font-bold">Total: {(total*currentCurrencyPrice).toFixed(2)} <span className='text-red-500'>( {currentCurrencyName} )</span></h3>
+<<<<<<< Updated upstream
 
                 </div>
                 <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Checkout</button>
+=======
+                 
+                </div>
+              
+>>>>>>> Stashed changes
               </div>
+              <Link to="/cart/checkout"><button className='my-5 bg-yellow-200 p-4 text-black border border-gray-200 rounded-lg shadow w-full hover:bg-yellow-500'>Checkout</button></Link>
             </div>
           </div>
         )}
       </div>
+          
     </>
   );
 }
