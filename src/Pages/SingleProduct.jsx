@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLoaderData, useParams } from 'react-router-dom'
 import { fetchData, fetchSingleProduct } from '../actions/actions';
 import HashLoader from "react-spinners/HashLoader";
+import SingleProductCard from '../components/SingleProductCard';
 
 
 export default function SingleProduct() {
@@ -10,6 +11,9 @@ export default function SingleProduct() {
   const dispatch = useDispatch();
   const { singleProduct, loading, error } = useSelector((state) => state.products);
   const {id} = useParams()
+
+ 
+  
   useEffect(()=>{
     dispatch(fetchSingleProduct(id))
   },[dispatch])
@@ -27,6 +31,9 @@ export default function SingleProduct() {
 
 
   return (
-    <div>SingleProduct</div>
+<>
+
+    {singleProduct.title &&  <SingleProductCard item={singleProduct} />}
+</>
   )
 }
