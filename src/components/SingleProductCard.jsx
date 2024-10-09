@@ -25,12 +25,12 @@ export default function SingleProductCard({ item }) {
 
           <p className='text-2xl text-gray-500' > <span className='text-gray-800 font-bold '>model : </span>{item?.model}</p>
           <p className='text-2xl text-gray-500' ><span className='text-gray-800 font-bold '>Description : </span>{item?.description}</p>
-          <p className='text-3xl text-red-500 my-2 ' >{item.discount ? (<><div className='line-through'><span className='text-red-800 font-bold '>Price : </span>{(item?.price * currentCurrencyPrice).toFixed(2)} <span className="text-red-900">{currentCurrencyName}</span></div>
+          <p className='text-3xl text-red-500 my-2 ' >{item.discount ? (<><div className='line-through my-2'><span className=' font-bold '>Price : </span>{(item?.price * currentCurrencyPrice).toFixed(2)} <span>{currentCurrencyName}</span></div>
         <div>
-        <span className='text-green-800 font-bold '>Price After Discount : </span>{((item?.price-item.discount) * currentCurrencyPrice).toFixed(2)} <span className="text-green-900">{currentCurrencyName}</span>
+        <span className='text-green-900 font-bold '>Price After Discount : {((item?.price-item.discount) * currentCurrencyPrice).toFixed(2)} {currentCurrencyName}</span>
         </div>
    
-      </>) : (<><span className='line-through text-red-800 font-bold '>Price : </span>{(item?.price * currentCurrencyPrice).toFixed(2)} <span className="text-red-900">{currentCurrencyName}</span></>)}</p>
+      </>) : (<><span className=' text-red-800 font-bold '>Price : </span>{(item?.price * currentCurrencyPrice).toFixed(2)} <span className="text-red-900">{currentCurrencyName}</span></>)}</p>
       {item.quantity ? (
         <ButtonPlusMinus item={item} />
       ) : data ? (
