@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../slices/cartslice';
-import ButtonPlusMinus from './ButtonPlusMinus';
+import ProductUpdateButtons from './ProductUpdateButtons';
+import ButtonPlusMinus from "./ButtonPlusMinus"
 
 const Card = ({ item }) => {
 
@@ -9,6 +10,9 @@ const Card = ({ item }) => {
   const {cartData} = useSelector((state)=>state.cart)
 
   const data = cartData.find((elem) => elem.id == item.id);
+
+
+  
 
   const { currentCurrencyName, currentCurrencyPrice } = useSelector((state) => state.currency);
 
@@ -19,16 +23,19 @@ const Card = ({ item }) => {
           src={item.image}
           alt="Product" 
           className="h-96 w-96 rounded-t-xl" 
-        />
+        />   </a>
         <div className="px-4 py-3 w-full">
           <span className="text-gray-700 mr-3 uppercase text-xs">{item.title}</span>
           <p className="text-lg font-bold text-black truncate block capitalize">{item.category}</p>
           <p className="text-lg font-semibold text-black">
-            {(item.price * currentCurrencyPrice).toFixed(2)} 
+          {item.quantity
+          ? (item.price * item.quantity * currentCurrencyPrice).toFixed(2)
+          : (item.price * currentCurrencyPrice).toFixed(2)}{" "}
             <span className="px-2 text-red-400">({currentCurrencyName})</span>
           </p>
-<ButtonPlusMinus/>
-         {data ? (
+          {item.quantity ? (
+        <ButtonPlusMinus item={item} />
+      ) : data ? (
         <button className="px-6 py-2 text-white bg-red-900 rounded" disabled>
           Already Added into Cart
         </button>
@@ -38,7 +45,8 @@ const Card = ({ item }) => {
           onClick={() => dispatch(addToCart(item))}
         >
           Add To Cart
-        </button> )}
+        </button>
+      )}
           <div className="flex items-center">
             <p className="text-lg font-semibold text-black cursor-auto my-3"></p>
             <del>
@@ -46,7 +54,7 @@ const Card = ({ item }) => {
             </del>
           </div>
         </div>
-      </a>
+   
     </div>
   );
 }
