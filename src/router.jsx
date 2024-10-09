@@ -17,11 +17,7 @@ import Login from "./components/Login";
 import Checkout from "./Pages/Checkout";
 import PrivateRouteHandle from "./components/PrivateRouteHandle";
 import Profile from "./Pages/Profile";
-
-
-
-
-
+import ChangePassword from "./components/ChangePassword";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +26,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
+        element: <Home />,
       },
       {
         path: "/blog",
@@ -42,9 +38,7 @@ const router = createBrowserRouter([
           },
           {
             path: ":id",
-            element: (
-              <SingleBlog />
-            )
+            element: <SingleBlog />,
           },
         ],
       },
@@ -59,13 +53,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Product />
-
+            element: <Product />,
           },
           {
             path: ":id",
             element: <SingleProduct />,
-
           },
         ],
       },
@@ -75,7 +67,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <PrivateRouteHandle>
+            <Profile />
+          </PrivateRouteHandle>
+        ),
+      },
+      {
+        path: "/changepassword",
+        element: <ChangePassword />,
       },
       {
         path: "/signup",
@@ -83,13 +83,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login />
-      }, {
+        element: <Login />,
+      },
+      {
         path: "/cart/checkout",
-        element: <PrivateRouteHandle>
-          <Checkout />
-        </PrivateRouteHandle>
-      }
+        element: (
+          <PrivateRouteHandle>
+            <Checkout />
+          </PrivateRouteHandle>
+        ),
+      },
     ],
   },
   {
