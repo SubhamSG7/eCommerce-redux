@@ -13,7 +13,6 @@ export default function Blog() {
 
 
 
-
   useEffect(()=>{
     dispatch(fetchBlog())
   },[dispatch])
