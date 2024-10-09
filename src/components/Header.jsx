@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { currencyChange } from '../slices/currencySlice';
 import { fetchCurrency } from '../actions/actions';
@@ -68,15 +68,15 @@ dispatch(currencyChange(e.target.value));
 
   return (
 
-    <div className='bg-cyan-500 flex justify-between items-center h-24 max-w-full mx-auto px-4 text-white'>
-      <h1 className='w-full text-3xl font-bold text-white'>Ecommerce</h1>
+    <div className='bg-cyan-500 flex justify-center items-center h-18 gap-2 max-w-full mx-auto px-4 text-white'>
+      <h1 className='w-full text-3xl font-bold text-white'><Link to="/">Ecommerce</Link></h1>
 
-      <ul className='hidden md:flex'>
+      <ul className='hidden md:flex justify-between  items-center gap-2 '>
         {navItems.map(item => (
           <li
             key={item.id}
             onClick={() => handleItemClick(item.nav)}
-            className='p-4 hover:bg-white rounded-xl m-2 cursor-pointer duration-300 hover:text-black'
+            className='p-5 hover:bg-white rounded-xl  cursor-pointer duration-300 hover:text-black'
           >
             {item.text}
           </li>
