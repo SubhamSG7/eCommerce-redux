@@ -22,6 +22,7 @@ function Login() {
   const location=useLocation();
   const path=location.state;
   async function handleLogin(e) {
+    
     e.preventDefault();
     dispatch(validation({ type: "login" }))
     if (validate.length === 0 && email.length > 4 && password.length > 6) {
@@ -35,14 +36,14 @@ function Login() {
           dispatch(setCredentials(""))
           const userRef = ref(db, 'Users/' + user.uid);
           const snapshot = await get(userRef);
+          let userDetails;
           if (snapshot.exists()) {
-            const userDetails = snapshot.val();
-            dispatch(setLoggedUser({ name: userDetails.name, email: userDetails.email }))
+            userDetails = snapshot.val();
           } else {
             console.log('No user data found');
           }
-          handleCookie('login',token)
-          path==="/cart/checkout"?navigate(path):navigate("/")
+          handleCookie('login',{token:token,name:userDetails.name,email:userDetails.email})
+          path==="/cart"?navigate(path):navigate("/")
         }
       } catch (error) {
         console.error('Login error:', error.message)
