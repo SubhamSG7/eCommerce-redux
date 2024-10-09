@@ -5,12 +5,13 @@ const API_KEY = import.meta.env.VITE_EXCHANGE_KEY
 export const fetchData = createAsyncThunk(
   'data/fetchData',
   async (url="") => {
-    const response = await fetch(`https://fakestoreapi.com/products${url}`);
+    const response = await fetch(`https://fakestoreapi.in/api/products${url}`);
+    
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    return data;
+    return data.products;
   }
 );
 
@@ -29,12 +30,14 @@ export const fetchBlog = createAsyncThunk(
   export const fetchSingleProduct = createAsyncThunk(
     'data/fetchSingleProduct',
     async (id) => {
-      const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+      const response = await fetch(`https://fakestoreapi.in/api/products/${id}`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      return data;
+      console.log(data);
+      
+      return data.product;
     }
   );
 
