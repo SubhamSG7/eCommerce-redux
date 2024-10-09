@@ -1,10 +1,13 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearDetails, emailHandler, getCredentials, getEmail, getPassword, getValidate, passHandler, setCredentials, validation } from '../slices/userSlice';
+import { clearDetails, emailHandler, getCredentials, getEmail, getPassword, getValidate, passHandler, setCredentials, setLoggedUser, validation } from '../slices/userSlice';
 import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from '../firebase-Config/FirebaseConfig';
+import { db, firebaseConfig } from '../firebase-Config/FirebaseConfig';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
 import {  Link, useNavigate } from 'react-router-dom';
+import { get, ref } from 'firebase/database';
+
 
 function Login() {
   const dispatch = useDispatch();
@@ -23,10 +26,19 @@ function Login() {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         const token = await user.getIdToken();
+        
         if(token){
           dispatch(clearDetails())
           dispatch(setCredentials(""))
-          navigate(-1)
+          const userRef = ref(db, 'Users/' + user.uid);
+          const snapshot = await get(userRef);
+          if (snapshot.exists()) {
+            const userDetails = snapshot.val();
+            dispatch(setLoggedUser({name:userDetails.name,email:userDetails.email}))
+          } else {
+            console.log('No user data found');
+          }
+          // navigate("/")
         }
       } catch (error) {
         console.error('Login error:', error.message)

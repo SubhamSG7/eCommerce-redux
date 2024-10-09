@@ -14,6 +14,7 @@ import BlogLayout from "./components/BlogLayout";
 
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import Checkout from "./Pages/Checkout";
 
 
 
@@ -76,6 +77,9 @@ const router = createBrowserRouter([
       {
         path:"/login",
         element:<Login/>
+      },{
+        path:"/cart/checkout",
+        element:<Checkout/>
       }
     ],
   },
