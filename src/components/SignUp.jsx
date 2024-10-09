@@ -1,44 +1,50 @@
-import { initializeApp } from 'firebase/app'
-import { getDatabase, set, ref } from "firebase/database"
-import React from 'react'
-import { firebaseConfig } from '../firebase-Config/FirebaseConfig'
-import { useDispatch, useSelector } from 'react-redux'
-import { emailHandler, getEmail, getName, getPassword, getValidate, nameHandler, passHandler, validation } from '../slices/userSlice'
-import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from "react-router-dom"
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import {  ref, set } from 'firebase/database';
+import { db } from '../firebase-Config/FirebaseConfig';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { emailHandler, getCredentials, getEmail, getName, getPassword, getValidate, nameHandler, passHandler, setCredentials, validation } from '../slices/userSlice';
+import { useNavigate } from "react-router-dom";
+import { firebaseConfig } from '../firebase-Config/FirebaseConfig';
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 function Signup() {
   const name = useSelector(getName);
   const email = useSelector(getEmail);
   const password = useSelector(getPassword);
   const validate = useSelector(getValidate);
+  const credentials=useSelector(getCredentials);
   const dispatch = useDispatch();
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
   const navigate = useNavigate();
-  
+
   async function handleSubmit(e) {
     e.preventDefault();
-    dispatch(validation())
-    if(validate.length===0 && name.length>3 && password.length>6 && email.length>4){
-      const id = uuidv4();
+    dispatch(validation({ type: "signin" }));
+
+    if (validate.length === 0 && name.length > 3 && password.length > 6 && email.length > 4) {
       try {
-        let resp = await set(ref(db, "users/" + id), {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user=userCredential.user
+        await set(ref(db, "Users/" + user.uid), {
           name,
           email,
           password
-        })
-        navigate("/login")
+        });
+        dispatch(setCredentials(""));
+        navigate("/login");
       } catch (error) {
-        console.log(error);
-  
+        console.error("Signup error:", error.message);
+        dispatch(setCredentials("Email Aleady Used"))
       }
     }
-
   }
+
   return (
     <>
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit}>
         <input type="text" required placeholder='Name' value={name} onChange={(e) => dispatch(nameHandler(e.target.value))} />
         <br />
         <input type="email" required placeholder='Email' value={email} onChange={(e) => dispatch(emailHandler(e.target.value))} />
@@ -48,9 +54,10 @@ function Signup() {
         <input type="submit" />
         <br />
         <p>{validate[0]}</p>
+        <p>{credentials}</p>
       </form>
     </>
-  )
+  );
 }
 
-export default Signup
+export default Signup;
