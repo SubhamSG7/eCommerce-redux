@@ -30,14 +30,6 @@ const Navbar = () => {
     setNav(false);
   };
 
-
-
-
-
-
-/////////////////////////////////////
-
-
 const dispatch = useDispatch();
 
 const {currencyData,error,loading} = useSelector((state)=>state.currency);
@@ -68,16 +60,6 @@ const availableCurrency =  currencyData.conversion_rates ? Object.keys(currencyD
 function currencyHandler(e) {
 dispatch(currencyChange(e.target.value));
 }
-
-
-
-
-
-
-
-///////////////////////////////
-
-
 
 
   return (

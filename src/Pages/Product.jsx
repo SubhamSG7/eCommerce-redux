@@ -4,6 +4,7 @@ import ProductPreview from '../components/ProductPreview';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../actions/actions';
 import HashLoader from "react-spinners/HashLoader";
+import Card from '../components/Card';
 
 
 export default function Product() {
@@ -13,7 +14,7 @@ export default function Product() {
   const { productsData, loading, error } = useSelector((state) => state.products);
 
   useEffect(()=>{
-    dispatch(fetchData("?limit=10"))
+    dispatch(fetchData("?limit=20"))
   },[dispatch])
 
   if (loading) return <div className='h-[100vh] flex justify-center items-center'> <HashLoader
@@ -28,9 +29,9 @@ export default function Product() {
   
   return (
     <div >
-      <h3 className='text-bold text-2xl text-center bg-gray-200 py-5 uppercase'>Products</h3>
+      <h3 className='text-bold text-4xl font-bold text-center  py-5 uppercase'>Products</h3>
       <div className='flex flex-wrap gap-4 justify-center   my-5'>
-      {productsData.map((item)=> <ProductPreview item={item}/>)}
+      {productsData.map((item)=> <Card item={item}/>)}
       </div>
     </div>
   )

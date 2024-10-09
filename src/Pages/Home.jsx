@@ -3,6 +3,9 @@ import {useDispatch, useSelector} from "react-redux"
 import { fetchData } from '../actions/actions';
 import HashLoader from "react-spinners/HashLoader";
 import ProductPreview from '../components/ProductPreview';
+import Card from '../components/Card';
+import Slider from '../components/Slider';
+import CarouselBasicExample from '../components/Slider';
 export default function Home() {
 
 
@@ -26,9 +29,14 @@ export default function Home() {
   if (error) return <div>Error: {error}</div>;
   
   return (
-    <div className='flex flex-wrap gap-4 justify-center  my-5'>
-      home page 
-      {productsData.map((item)=> <ProductPreview item={item}/>)}
+    <>
+    <Slider/>
+    <h3 className='text-4xl font-bold text-cyan-700 text-center mb-3 mt-8'>Featured Components</h3>
+    <div className=" ml-9 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+     
+    {productsData.map((item)=> <Card item={item}/>)}
     </div>
+    </>
+   
   )
 }
