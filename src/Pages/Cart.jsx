@@ -3,8 +3,12 @@ import { useSelector } from 'react-redux';
 import Card from '../components/Card';
 
 export default function Cart() {
+  const {currentCurrencyName,currentCurrencyPrice} = useSelector((state)=>state.currency)
   const cartItems = useSelector((state) => state.cart.cartData);
-  const total = cartItems.reduce((sum, item) => sum + item.price, 0); // Assuming `price` is a field in your item
+  const total = cartItems.reduce((sum, item) => sum + (item.quantity ? item.price*item.quantity : item.price), 0);
+
+  
+  
 
   return (
     <>
@@ -31,7 +35,7 @@ export default function Cart() {
                  
                 </ul>
                 <div className="border-t mt-4 pt-2">
-                  <h3 className="text-xl font-bold">Total: ${total.toFixed(2)}</h3>
+                  <h3 className="text-xl font-bold">Total: {(total*currentCurrencyPrice).toFixed(2)} <span className='text-red-500'>( {currentCurrencyName} )</span></h3>
                 </div>
               </div>
             </div>
