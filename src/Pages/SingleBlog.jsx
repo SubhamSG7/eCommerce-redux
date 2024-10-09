@@ -31,6 +31,7 @@ export default function SingleBlog() {
   
   return (
     <>
+   {singleBlog.title && <SingleBlogCard item={singleBlog}/>}
     </>
   )
 }
