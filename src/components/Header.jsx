@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 import { currencyChange } from '../slices/currencySlice';
-import HashLoader from "react-spinners/HashLoader";
-import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrency } from '../actions/actions';
+import HashLoader from "react-spinners/HashLoader";
+
+
 
 
 const Navbar = () => {
@@ -29,7 +31,12 @@ const Navbar = () => {
   };
 
 
-//////////////////////////////////
+
+
+
+
+/////////////////////////////////////
+
 
 const dispatch = useDispatch();
 
@@ -64,8 +71,11 @@ dispatch(currencyChange(e.target.value));
 
 
 
-//////////////////////////////////
 
+
+
+
+///////////////////////////////
 
 
 
@@ -108,10 +118,11 @@ dispatch(currencyChange(e.target.value));
             {item.text}
           </li>
         ))}
+       
       </ul>
       <select
           name="currency"
-          className="bg-black px-4 rounded cursor-pointer bg-cyan-500 border border-white px-4 text-white py-2"
+          className="bg-cyan-500 border border-white text-white px-4 rounded cursor-pointer"
           onChange={currencyHandler}
           value={currentCurrency}
      
