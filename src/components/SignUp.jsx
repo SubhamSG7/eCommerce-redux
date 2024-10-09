@@ -3,7 +3,7 @@ import {getDatabase,set,ref} from "firebase/database"
 import React from 'react'
 import { firebaseConfig } from '../firebase-Config/FirebaseConfig'
 import { useDispatch, useSelector } from 'react-redux'
-import { getName, nameHandler } from '../store/userSlice'
+import { getName, nameHandler } from '../slices/userSlice'
 
 function Signup() {
   const name=useSelector(getName);
