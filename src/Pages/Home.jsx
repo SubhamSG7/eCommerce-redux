@@ -32,7 +32,7 @@ export default function Home() {
     <h3 className='text-4xl font-bold text-cyan-700 text-center mb-3 mt-8'>Featured Components</h3>
     <div className=" ml-9 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
      
-    {productsData.map((item)=> <Card item={item}/>)}
+    {productsData.map((item)=> <Card key={item.id} item={item}/>)}
     </div>
     </>
    

@@ -31,7 +31,7 @@ export default function Product() {
     <div >
       <h3 className='text-bold text-4xl font-bold text-center  py-5 uppercase'>Products</h3>
       <div className='flex flex-wrap gap-4 justify-center   my-5'>
-      {productsData.map((item)=> <Card item={item}/>)}
+      {productsData.map((item)=> <Card key={item.id} item={item}/>)}
       </div>
     </div>
   )
