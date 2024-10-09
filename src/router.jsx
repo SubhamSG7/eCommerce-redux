@@ -12,6 +12,7 @@ import SingleBlog from "./Pages/SingleBlog";
 import ProductLayout from "./components/ProductLayout";
 import BlogLayout from "./components/BlogLayout";
 import Signup from "./components/SignUp";
+import Login from "./components/Login";
 
 async function fetchProducts(url) {
   try {
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <Signup />,
       },
+      {
+        path:"/login",
+        element:<Login/>
+      }
     ],
   },
   {
