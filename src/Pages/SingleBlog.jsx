@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchSingleBlog, fetchSingleProduct } from '../actions/actions';
 import HashLoader from "react-spinners/HashLoader";
+import SingleBlogCard from '../components/SingleBlogCard';
 
 
 export default function SingleBlog() {
@@ -29,6 +30,7 @@ export default function SingleBlog() {
   if (error) return <div>Error: {error}</div>;
   
   return (
-    <div>SingleBlog</div>
+    <>
+    </>
   )
 }
