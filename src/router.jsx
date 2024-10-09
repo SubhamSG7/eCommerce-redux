@@ -11,7 +11,10 @@ import SingleProduct from "./Pages/SingleProduct";
 import SingleBlog from "./Pages/SingleBlog";
 import ProductLayout from "./components/ProductLayout";
 import BlogLayout from "./components/BlogLayout";
-import SignUp from "./components/SignUp";
+
+import Signup from "./components/SignUp";
+import Login from "./components/Login";
+
 
 
 
@@ -70,6 +73,10 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <SignUp />,
       },
+      {
+        path:"/login",
+        element:<Login/>
+      }
     ],
   },
   {
