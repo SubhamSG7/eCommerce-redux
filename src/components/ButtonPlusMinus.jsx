@@ -45,6 +45,8 @@ dispatch(updateCart(filterData))
           <span className="mx-2">{item.quantity}</span>
           <button onClick={()=>updateQuantity(item.id,"increment")} className="px-2 py-1 border rounded">+</button>
         </div>
+      <button className=" rounded px-4 my-4 py-2 bg-red-600 hover:bg-red-900" onClick={()=>dispatch(deleteFormCart(item.id))}>Delete</button>
+
     </div>
   )
 }
