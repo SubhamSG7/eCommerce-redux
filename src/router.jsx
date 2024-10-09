@@ -12,7 +12,7 @@ import SingleBlog from "./Pages/SingleBlog";
 import ProductLayout from "./components/ProductLayout";
 import BlogLayout from "./components/BlogLayout";
 
-import Signup from "./components/SignUp";
+import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 
 
