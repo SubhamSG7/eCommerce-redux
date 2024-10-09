@@ -1,7 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../slices/cartslice';
 
 const Card = ({ item }) => {
+
+  const dispatch = useDispatch()
+  const {cartData} = useSelector((state)=>state.cart)
+
+  const data = cartData.find((elem) => elem.id == item.id);
+
   const { currentCurrencyName, currentCurrencyPrice } = useSelector((state) => state.currency);
 
   return (
@@ -19,13 +26,18 @@ const Card = ({ item }) => {
             {(item.price * currentCurrencyPrice).toFixed(2)} 
             <span className="px-2 text-red-400">({currentCurrencyName})</span>
           </p>
-          <button
-          type="button"
-          className={`mt-4 py-2 bg-cyan-400 focus:ring-indigo-500 text-white w-full transition duration-200 rounded-lg`}
-         
-        >
-            Add to Cart
+
+         {data ? (
+        <button className="px-6 py-2 text-white bg-red-900 rounded" disabled>
+          Already Added into Cart
         </button>
+      ) : (
+        <button
+          className="px-6 py-2 text-white bg-slate-700 rounded hover:bg-slate-900"
+          onClick={() => dispatch(addToCart(item))}
+        >
+          Add To Cart
+        </button> )}
           <div className="flex items-center">
             <p className="text-lg font-semibold text-black cursor-auto my-3"></p>
             <del>

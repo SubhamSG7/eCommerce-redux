@@ -9,17 +9,23 @@ import { fetchData,fetchBlog } from '../actions/actions';
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    cart:[], 
+    cartData:[], 
     loading:false,
     error:null,
   },
-  reducers: {},
+  reducers: {
+
+    addToCart:function(state,action){
+      state.cartData = [...state.cartData,action.payload]
+    }
+
+  },
 
 
 
 })
 
-// export const { incremented, decremented } = cartSlice.actions
+export const {addToCart } = cartSlice.actions
 export default cartSlice.reducer
 
 
