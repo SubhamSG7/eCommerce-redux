@@ -7,9 +7,6 @@ import { fetchCurrency } from '../actions/actions';
 import HashLoader from "react-spinners/HashLoader";
 import {updateCart} from "../slices/cartslice"
 
-
-
-
 const Navbar = () => {
   const navigate = useNavigate();
   const [nav, setNav] = useState(false);
@@ -27,7 +24,7 @@ const {cartData} = useSelector((state)=>state.cart)
     { id: 2, text: `Cart (${cartData ? cartData.length : 0})`, nav: "/cart" },
     { id: 3, text: 'Blog', nav: "/blog" },
     { id: 4, text: 'Contact', nav: "/contact" },
-    { id: 5, text: 'SignUp', nav: "/signUp" },
+    { id: 5, text: 'Login', nav: "/login" },
  
   ];
 

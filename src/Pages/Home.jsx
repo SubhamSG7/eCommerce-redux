@@ -2,10 +2,8 @@ import React, { useContext ,useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { fetchData } from '../actions/actions';
 import HashLoader from "react-spinners/HashLoader";
-import ProductPreview from '../components/ProductPreview';
 import Card from '../components/Card';
 import Slider from '../components/Slider';
-import CarouselBasicExample from '../components/Slider';
 export default function Home() {
 
 

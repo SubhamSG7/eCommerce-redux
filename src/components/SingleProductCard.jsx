@@ -1,12 +1,18 @@
 import React, { useContext } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import ButtonPlusMinus from './ButtonPlusMinus'
+import { addToCart } from '../slices/cartslice'
 
 export default function SingleProductCard({ item }) {
 
   const { currentCurrencyName, currentCurrencyPrice } = useSelector((state) => state.currency)
 
+  const {cartData} = useSelector((state)=>state.cart)
+
+  const data = cartData.find((elem) => elem.id == item.id);
 
 
+  const dispatch = useDispatch()
   return (
     <>
       {item && <div className='bg-white flex gap-20 p-20'>
@@ -23,11 +29,26 @@ export default function SingleProductCard({ item }) {
         <div>
         <span className='text-green-800 font-bold '>Price After Discount : </span>{((item?.price-item.discount) * currentCurrencyPrice).toFixed(2)} <span className="text-green-900">{currentCurrencyName}</span>
         </div>
+        {item.quantity ? (
+        <ButtonPlusMinus item={item} />
+      ) : data ? (
+        <button className="px-6 py-2 text-white bg-red-900 rounded" disabled>
+          Already Added into Cart
+        </button>
+      ) : (
+        <button
+          className="px-6 py-2 text-white bg-slate-700 rounded hover:bg-slate-900"
+          onClick={() => dispatch(addToCart(item))}
+        >
+          Add To Cart
+        </button>
+      )}
       </>) : (<><span className='line-through text-red-800 font-bold '>Price : </span>{(item?.price * currentCurrencyPrice).toFixed(2)} <span className="text-red-900">{currentCurrencyName}</span></>)}</p>
         </div>
         <div>
 
         </div>
+        
         <img src={item.image} alt="" srcSet="" className='object-fit w-[30vw]' />
       </div>}
     </>
