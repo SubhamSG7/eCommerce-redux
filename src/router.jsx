@@ -15,6 +15,7 @@ import BlogLayout from "./components/BlogLayout";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Checkout from "./Pages/Checkout";
+import PrivateRouteHandle from "./components/PrivateRouteHandle";
 
 
 
@@ -40,8 +41,9 @@ const router = createBrowserRouter([
           },
           {
             path: ":id",
-            element: <SingleBlog />
-         
+            element: (
+              <SingleBlog />
+            )
           },
         ],
       },
@@ -52,17 +54,17 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <ProductLayout />,
-    
+
         children: [
           {
             index: true,
             element: <Product />
-          
+
           },
           {
             path: ":id",
             element: <SingleProduct />,
-      
+
           },
         ],
       },
@@ -75,11 +77,13 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path:"/login",
-        element:<Login/>
-      },{
-        path:"/cart/checkout",
-        element:<Checkout/>
+        path: "/login",
+        element: <Login />
+      }, {
+        path: "/cart/checkout",
+        element: <PrivateRouteHandle>
+          <Checkout />
+        </PrivateRouteHandle>
       }
     ],
   },
