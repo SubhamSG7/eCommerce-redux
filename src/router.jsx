@@ -16,6 +16,7 @@ import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Checkout from "./Pages/Checkout";
 import PrivateRouteHandle from "./components/PrivateRouteHandle";
+import Profile from "./Pages/Profile";
 
 
 
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
       {
         path: "/signup",
