@@ -5,10 +5,11 @@ import Card from '../components/Card';
 export default function Cart() {
   const {currentCurrencyName,currentCurrencyPrice} = useSelector((state)=>state.currency)
   const cartItems = useSelector((state) => state.cart.cartData);
+
   const total = cartItems.reduce((sum, item) => sum + (item.quantity ? item.price*item.quantity : item.price), 0);
 
   
-  
+
 
   return (
     <>
@@ -24,19 +25,22 @@ export default function Cart() {
             <div className="flex-1">
               <div className="flex flex-wrap md:flex-row">
                 {cartItems.map((item) => (
-                  <Card key={item.id} item={item} />
+                 
+                    <Card item={item} />
+                
                 ))}
               </div>
             </div>
             <div className="md:w-1/3 md:ml-4 mt-4 md:mt-0">
               <div className="bg-gray-100 p-4 text-black rounded-lg shadow">
                 <h3 className="text-xl font-bold mb-4">Product Summary</h3>
-                <ul>
-                 
-                </ul>
+               
                 <div className="border-t mt-4 pt-2">
+
                   <h3 className="text-xl font-bold">Total: {(total*currentCurrencyPrice).toFixed(2)} <span className='text-red-500'>( {currentCurrencyName} )</span></h3>
+
                 </div>
+                <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Checkout</button>
               </div>
             </div>
           </div>
