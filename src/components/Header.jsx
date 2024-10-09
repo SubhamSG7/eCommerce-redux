@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { currencyChange } from '../slices/currencySlice';
 import { fetchCurrency } from '../actions/actions';
 import HashLoader from "react-spinners/HashLoader";
+import {updateCart} from "../slices/cartslice"
 
 
 
@@ -23,7 +24,7 @@ const {cartData} = useSelector((state)=>state.cart)
   const navItems = [
     
     { id: 1, text: 'Products', nav: "/products" },
-    { id: 2, text: `Cart (${cartData.length})`, nav: "/cart" },
+    { id: 2, text: `Cart (${cartData ? cartData.length : 0})`, nav: "/cart" },
     { id: 3, text: 'Blog', nav: "/blog" },
     { id: 4, text: 'Contact', nav: "/contact" },
     { id: 5, text: 'SignUp', nav: "/signUp" },
@@ -48,6 +49,24 @@ useEffect(()=>{
   
 },[dispatch])
 
+
+useEffect(()=>{
+    if(cartData?.length > 0){
+      localStorage.setItem("cart",JSON.stringify(cartData))
+    }
+},[cartData])
+
+
+useEffect(()=>{
+ 
+ const localData =  JSON.parse(localStorage.getItem("cart"))
+if(localData !== null){
+
+  dispatch(updateCart(localData))
+}
+
+
+},[])
 
 
 if (loading) return <div className='h-[100vh] flex justify-center items-center'> <HashLoader
