@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../slices/cartslice';
+import ButtonPlusMinus from './ButtonPlusMinus';
 
 const Card = ({ item }) => {
 
@@ -26,7 +27,7 @@ const Card = ({ item }) => {
             {(item.price * currentCurrencyPrice).toFixed(2)} 
             <span className="px-2 text-red-400">({currentCurrencyName})</span>
           </p>
-
+<ButtonPlusMinus/>
          {data ? (
         <button className="px-6 py-2 text-white bg-red-900 rounded" disabled>
           Already Added into Cart
