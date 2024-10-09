@@ -5,4 +5,7 @@ export function handleCookie(type,token){
     if(type==="login" && token){
         Cookies.set('token',token,{expires:1})
     }
+    if(type==="logout"){
+        Cookies.remove('token')
+    }
 }
