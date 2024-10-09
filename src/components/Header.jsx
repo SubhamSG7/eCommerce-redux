@@ -18,10 +18,10 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { id: 1, text: 'SignUp', nav: "/SignUp" },
+    { id: 1, text: 'SignUp', nav: "/signUp" },
     { id: 2, text: 'Cart', nav: "/cart" },
-    { id: 3, text: 'Blog', nav: "/Blog" },
-    { id: 4, text: 'Contact', nav: "/ContactUs" },
+    { id: 3, text: 'Blog', nav: "/blog" },
+    { id: 4, text: 'Contact', nav: "/contact" },
     { id: 5, text: 'Products', nav: "/products" },
   ];
 

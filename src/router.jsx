@@ -11,25 +11,9 @@ import SingleProduct from "./Pages/SingleProduct";
 import SingleBlog from "./Pages/SingleBlog";
 import ProductLayout from "./components/ProductLayout";
 import BlogLayout from "./components/BlogLayout";
-import Signup from "./components/SignUp";
+import SignUp from "./components/SignUp";
 
-async function fetchProducts(url) {
-  try {
-    const response = await axios.get(url);
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-}
 
-async function fetchSingleProduct(event,url) {
-  try {
-    const response = await axios.get(url+event.params.id);
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 
 
@@ -84,7 +68,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/signup",
-        element: <Signup />,
+        element: <SignUp />,
       },
     ],
   },

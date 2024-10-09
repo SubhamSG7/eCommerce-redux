@@ -41,7 +41,9 @@ export const fetchBlog = createAsyncThunk(
   export const fetchSingleBlog = createAsyncThunk(
     'data/fetchSingleBlog',
     async (id) => {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);      
+      const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`); 
+     
+           
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
