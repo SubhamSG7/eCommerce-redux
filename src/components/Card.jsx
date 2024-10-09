@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../slices/cartslice';
 import ProductUpdateButtons from './ProductUpdateButtons';
 import ButtonPlusMinus from "./ButtonPlusMinus"
+import { Link } from 'react-router-dom';
 
 const Card = ({ item }) => {
 
@@ -18,12 +19,12 @@ const Card = ({ item }) => {
 
   return (
     <div className="w-96 ml-2 flex flex-col items-center bg-white shadow-md rounded-xl transition-transform duration-500 hover:scale-105 hover:shadow-xl">
-      <a href="#" className="w-full">
+      <Link to={`/products/${item.id}`} className="w-full">
         <img 
           src={item.image}
           alt="Product" 
           className="h-96 w-96 rounded-t-xl" 
-        />   </a>
+        />   </Link>
         <div className="px-4 py-3 w-full">
           <span className="text-gray-700 mr-3 uppercase text-xs">{item.title}</span>
           <p className="text-lg font-bold text-black truncate block capitalize">{item.category}</p>

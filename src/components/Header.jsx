@@ -21,11 +21,13 @@ const {cartData} = useSelector((state)=>state.cart)
 
 
   const navItems = [
-    { id: 1, text: 'SignUp', nav: "/signUp" },
+    
+    { id: 1, text: 'Products', nav: "/products" },
     { id: 2, text: `Cart (${cartData.length})`, nav: "/cart" },
     { id: 3, text: 'Blog', nav: "/blog" },
     { id: 4, text: 'Contact', nav: "/contact" },
-    { id: 5, text: 'Products', nav: "/products" },
+    { id: 5, text: 'SignUp', nav: "/signUp" },
+ 
   ];
 
   const handleItemClick = (navPath) => {
@@ -68,10 +70,10 @@ dispatch(currencyChange(e.target.value));
 
   return (
 
-    <div className='bg-cyan-500 flex justify-center items-center h-18 gap-2 max-w-full mx-auto px-4 text-white'>
+    <div className='bg-cyan-500 flex justify-center items-center h-20 gap-2 max-w-full mx-auto px-4 text-white'>
       <h1 className='w-full text-3xl font-bold text-white'><Link to="/">Ecommerce</Link></h1>
 
-      <ul className='hidden md:flex justify-between  items-center gap-2 '>
+      <ul className='flex justify-center items-center'>
         {navItems.map(item => (
           <li
             key={item.id}
