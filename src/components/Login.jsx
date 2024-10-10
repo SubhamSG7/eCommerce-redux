@@ -53,8 +53,10 @@ function Login() {
               name: userDetails.name,
               email: userDetails.email,
             });
-            if (path === "/cart") {
-              navigate(path);
+            console.log(path);
+            
+            if (path === "/cart/checkout") {
+              navigate("/cart");
             } else {
               navigate("/");
             }
@@ -74,8 +76,10 @@ function Login() {
   }
   return (
     <>
-      {console.log(credentials)}
-      {/* {use this to show alert to client} */}
+      {/* {console.log(credentials)}
+      {console.log(validate)} */}
+        {/* {use this for alert} */}
+   
       <form
         onSubmit={handleLogin}
         className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8"

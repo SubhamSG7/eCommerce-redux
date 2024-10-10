@@ -6,7 +6,6 @@ function PrivateRouteHandle({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname;
-  console.log("hello");
   useEffect(() => {
     const token = Cookies.get("token");
     if (!token) {
