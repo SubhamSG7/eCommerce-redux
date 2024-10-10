@@ -7,7 +7,7 @@ export default function SingleProductCard({ item }) {
 
   const { currentCurrencyName, currentCurrencyPrice } = useSelector((state) => state.currency)
 
-  const {cartData} = useSelector((state)=>state.cart)
+  const { cartData } = useSelector((state) => state.cart)
 
   const data = cartData.find((elem) => elem.id == item.id);
 
@@ -25,31 +25,40 @@ export default function SingleProductCard({ item }) {
 
           <p className='text-2xl text-gray-500' > <span className='text-gray-800 font-bold '>model : </span>{item?.model}</p>
           <p className='text-2xl text-gray-500' ><span className='text-gray-800 font-bold '>Description : </span>{item?.description}</p>
-          <p className='text-3xl text-red-500 my-2 ' >{item.discount ? (<><div className='line-through my-2'><span className=' font-bold '>Price : </span>{(item?.price * currentCurrencyPrice).toFixed(2)} <span>{currentCurrencyName}</span></div>
-        <div>
-        <span className='text-green-900 font-bold '>Price After Discount : {((item?.price-item.discount) * currentCurrencyPrice).toFixed(2)} {currentCurrencyName}</span>
+          <div className='text-3xl text-red-500 my-2 ' >
+            {item.discount ? (
+              <>
+                <div className='line-through my-2'>
+                  <span className=' font-bold '>Price : </span>{
+                    (item?.price * currentCurrencyPrice).toFixed(2)}
+                  <span>{currentCurrencyName}</span>
+                </div>
+                <div>
+                  <span className='text-green-900 font-bold '>Price After Discount : {((item?.price - item.discount) * currentCurrencyPrice).toFixed(2)} {currentCurrencyName}</span>
+                </div>
+              </>) : (
+              <>
+                <span className=' text-red-800 font-bold '>Price : </span>
+                {(item?.price * currentCurrencyPrice).toFixed(2)}
+                <span className="text-red-900">{currentCurrencyName}</span>
+              </>)}
+          </div>
+          {item.quantity ? (
+            <ButtonPlusMinus item={item} />
+          ) : data ? (
+            <button className="px-6 py-2 text-white bg-red-900 rounded" disabled>
+              Already Added into Cart
+            </button>
+          ) : (
+            <button
+              className="px-6 py-2 text-white bg-slate-700 rounded hover:bg-slate-900"
+              onClick={() => dispatch(addToCart(item))}
+            >
+              Add To Cart
+            </button>
+          )}
         </div>
-   
-      </>) : (<><span className=' text-red-800 font-bold '>Price : </span>{(item?.price * currentCurrencyPrice).toFixed(2)} <span className="text-red-900">{currentCurrencyName}</span></>)}</p>
-      {item.quantity ? (
-        <ButtonPlusMinus item={item} />
-      ) : data ? (
-        <button className="px-6 py-2 text-white bg-red-900 rounded" disabled>
-          Already Added into Cart
-        </button>
-      ) : (
-        <button
-          className="px-6 py-2 text-white bg-slate-700 rounded hover:bg-slate-900"
-          onClick={() => dispatch(addToCart(item))}
-        >
-          Add To Cart
-        </button>
-      )}
-        </div>
-        <div>
-
-        </div>
-        
+     
         <img src={item.image} alt="" srcSet="" className='object-fit w-[30vw]' />
       </div>}
     </>
