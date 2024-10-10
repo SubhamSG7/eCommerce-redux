@@ -3,27 +3,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchBlog } from '../actions/actions';
 import HashLoader from 'react-spinners/HashLoader';
 import { Link, useParams, useLocation } from 'react-router-dom';
+import { setCurrentPage } from '../slices/blogSlice';
 
 export default function Blog() {
   const dispatch = useDispatch();
-  const { id } = useParams();
   const location = useLocation();
-  
-  const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 10;
-
-  const { blogData, loading, error } = useSelector((state) => state.blog);
+  const {currentPage, blogData, loading, error } = useSelector((state) => state.blog);
   
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const page = parseInt(params.get('page')) || 1; 
-    setCurrentPage(page);
+  dispatch(setCurrentPage(page));
   }, [location.search]);
 
   useEffect(() => {
     dispatch(fetchBlog());
   }, [dispatch]);
 
+
+  
   if (loading) {
     return (
       <div className='h-[100vh] flex justify-center items-center'>
@@ -46,7 +46,7 @@ export default function Blog() {
   const totalPages = Math.ceil(blogData.length / postsPerPage);
 
   const handlePageChange = (page) => {
-    setCurrentPage(page);
+   dispatch(setCurrentPage(page));
     window.history.pushState({}, '', `?page=${page}`); 
   };
 

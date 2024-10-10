@@ -17,7 +17,7 @@ import Login from "./components/Login";
 import Checkout from "./Pages/Checkout";
 import PrivateRouteHandle from "./components/PrivateRouteHandle";
 import Profile from "./Pages/Profile";
-import ChangePassword from "./components/ChangePassword";
+import ChangePassword from "./Pages/ChangePassword";
 
 const router = createBrowserRouter([
   {
