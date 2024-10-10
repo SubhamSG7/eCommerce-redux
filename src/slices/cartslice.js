@@ -12,6 +12,7 @@ const cartSlice = createSlice({
     cartData:[], 
     loading:false,
     error:null,
+    orderPlaced:[]
   },
   reducers: {
 
@@ -28,7 +29,18 @@ const cartSlice = createSlice({
 
 deleteFormCart:function(state,action){
       state.cartData = state.cartData.filter((elem) => elem.id !== action.payload)
+    },
+
+    setOrderPlaced:function(state,action){
+        const data = [...state.orderPlaced];
+        data.map((item)=>{
+        
+        })
     }
+
+
+   
+
 
   },
 

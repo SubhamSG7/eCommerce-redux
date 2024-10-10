@@ -16,6 +16,15 @@ export default function Checkout() {
          dispatch(setUserdetail({name:user?.name,email:user?.email}))
     },[userData?.email])
     const date = d.toLocaleString()
+
+
+  const cartItems = useSelector((state) => state.cart.cartData);
+    
+  console.log(cartItems);
+  
+
+
+
     
   
     
