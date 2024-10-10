@@ -25,9 +25,9 @@ export default function Cart() {
           <div className="flex flex-col md:flex-row">
             <div className="flex-1">
               <div className="flex flex-wrap md:flex-row">
-                {cartItems.map((item) => (
+                {cartItems.map((item,index) => (
                  
-                    <Card item={item} />
+                    <Card key={index} item={item} />
                 
                 ))}
               </div>

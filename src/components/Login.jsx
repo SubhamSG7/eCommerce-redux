@@ -89,7 +89,7 @@ function Login() {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <div>
             <label
-              for="email"
+              htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               Email address
@@ -110,7 +110,7 @@ function Login() {
           <div>
             <div className="flex items-center justify-between">
               <label
-                for="password"
+                htmlFor="password"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Password

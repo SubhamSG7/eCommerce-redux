@@ -20,13 +20,13 @@ export default function SingleProduct() {
 
 
 
-  if (loading) return <div className='h-[100vh] flex justify-center items-center'> <HashLoader
+  if (loading){ return <div className='h-[100vh] flex justify-center items-center'> <HashLoader
   color="green"
   loading={loading}
   size={150}
   aria-label="Loading Spinner"
   data-testid="loader"
-/></div>;
+/></div>};
   if (error) return <div>Error: {error}</div>;
 
 

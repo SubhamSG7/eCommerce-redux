@@ -67,7 +67,7 @@ export default function Blog() {
       <div className='mt-4 flex justify-center'>
         {Array.from({ length: totalPages }, (_, index) => (
 
-          /* From Uiverse.io by omriluz */ 
+        
 <button
  key={index + 1}
    onClick={() => handlePageChange(index + 1)}
@@ -75,21 +75,21 @@ export default function Blog() {
      currentPage === index + 1 ? 'bg-cyan-800 text-gray-700' : 'bg-white text-cyan-500'
    }`}
 >
-  <div class="bloom-container">
-    <div class={`button-container-main ${ currentPage === index + 1 ? "bg-pink-500" : "" }`}>
-      <div class="button-inner">
-        <div class="back "></div>
-        <div class="front">
+  <div className="bloom-container">
+    <div className={`button-container-main ${ currentPage === index + 1 ? "bg-pink-500" : "" }`}>
+      <div className="button-inner">
+        <div className="back "></div>
+        <div className="front">
         {index + 1}
         </div>
       </div>
-      <div class="button-glass">
-        <div class="back"></div>
-        <div class="front"></div>
+      <div className="button-glass">
+        <div className="back"></div>
+        <div className="front"></div>
       </div>
     </div>
-    <div class="bloom bloom1"></div>
-    <div class="bloom bloom2"></div>
+    <div className="bloom bloom1"></div>
+    <div className="bloom bloom2"></div>
   </div>
 </button>
 
