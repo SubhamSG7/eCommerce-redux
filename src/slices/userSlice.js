@@ -15,7 +15,8 @@ const userSlice = createSlice({
      passVal:"",
     validate:[],
     credentials:"",
-    loggedUser:null
+    loggedUser:null,
+    userDetail:null,
   },
   reducers: {
         nameHandler:(state,action)=>{
@@ -62,6 +63,9 @@ const userSlice = createSlice({
         },
         setLoggedUser:function(state,action){
             state.loggedUser=action.payload;
+        },
+        setUserdetail:function (state,action){
+            state.userDetail=action.payload
         }
   },
 
@@ -73,7 +77,8 @@ export const getPassword=(state)=>state.user.passVal;
 export const getValidate=(state)=>state.user.validate;
 export const getCredentials=(state)=>state.user.credentials;
 export const getLoggedUser=(state)=>state.user.loggedUser;
+export const getUserDetail=(state)=>state.user.userDetail;
 
-export const { nameHandler,emailHandler,passHandler,validation ,clearDetails,setCredentials,setLoggedUser } = userSlice.actions
+export const { nameHandler,emailHandler,passHandler,validation ,clearDetails,setCredentials,setLoggedUser,setUserdetail } = userSlice.actions
 export default userSlice.reducer
 

@@ -1,17 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { nanoid } from 'nanoid'
 import Cookies from 'js-cookie';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserDetail, setUserdetail } from '../slices/userSlice';
 
 export default function Checkout() {
-  console.log("ahjf");
     const location=useLocation();
     const d = new Date()
-
+    const userDetail=useSelector(getUserDetail);
+    const dispatch=useDispatch();
     const userData = Cookies.get("token")
-    console.log("asdasfasf"+userData);
-    
-
+    useEffect(()=>{
+        const user=JSON.parse(userData);
+         dispatch(setUserdetail({name:user?.name,email:user?.email}))
+    },[userData?.email])
     const date = d.toLocaleString()
     
   
@@ -23,9 +26,10 @@ export default function Checkout() {
     <div className="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
         <div className="w-full flex-col justify-start items-center lg:gap-12 gap-8 inline-flex">
             <div className="w-full flex-col justify-start items-center gap-3 flex">
-                <h2 className="text-center text-gray-900 text-3xl font-bold font-manrope leading-normal">John, Thank You for Your Order!</h2>
+                <h2 className="text-center text-gray-900 text-3xl font-bold font-manrope leading-normal">{userDetail?userDetail.name:""}, Thank You for Your Order!</h2>
                 <div className="justify-center items-center gap-2.5 inline-flex">
                     <h5 className="text-gray-500 text-lg font-normal leading-8">Order ID: {nanoid()} / Order Date: {date}</h5>
+                    <h6 className="text-gray-500 text-lg font-normal leading-8">Ordered Email: {userDetail?userDetail.email:""}</h6>
                 </div>
             </div>
             <div className="w-full flex-col justify-start items-center gap-8 flex">
