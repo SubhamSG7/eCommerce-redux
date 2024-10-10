@@ -24,11 +24,8 @@ const Navbar = () => {
 
   
   const navigate = useNavigate();
-  const [nav, setNav] = useState(false);
 
-  const handleNav = () => {
-    setNav(!nav);
-  };
+
 
 const {cartData} = useSelector((state)=>state.cart)
 
@@ -39,14 +36,11 @@ const {cartData} = useSelector((state)=>state.cart)
     { id: 2, text: `Cart (${cartData ? cartData.length : 0})`, nav: "/cart" },
     { id: 3, text: 'Blog', nav: "/blog" },
     { id: 4, text: 'Contact', nav: "/contact" },
-    { id: 5, text: loggedUser?"profile":'Login', nav: loggedUser?"/profile":"/login" },
+    { id: 5, text: loggedUser?"Profile":'Login', nav: loggedUser?"/profile":"/login" },
  
   ];
 
-  const handleItemClick = (navPath) => {
-    navigate(navPath);
-    setNav(false);
-  };
+
 
 
 
@@ -108,7 +102,7 @@ dispatch(currencyChange(e.target.value));
     <div className='flex items-center space-x-4 ml-auto'> 
       <ul className='flex items-center space-x-4'> 
         {navItems.map(item => (
-          <Link to={item.nav} key={item.id}> {/* Moved key to Link */}
+          <Link to={item.nav} key={item.id}> 
             <li
               className='p-2 hover:bg-white rounded-xl cursor-pointer duration-300 hover:text-black'
             >
@@ -118,13 +112,11 @@ dispatch(currencyChange(e.target.value));
         ))}
       </ul>
   
-      <div onClick={handleNav} className='block md:hidden'>
-        {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
-      </div>
+     
   
       <select
         name="currency"
-        className="bg-transparent border border-white text-white px-4 rounded cursor-pointer" // Set bg-transparent for the select
+        className="bg-transparent border border-white text-white px-4 rounded cursor-pointer" 
         onChange={currencyHandler}
         value={currentCurrency}
       >
