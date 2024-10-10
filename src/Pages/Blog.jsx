@@ -3,27 +3,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchBlog } from '../actions/actions';
 import HashLoader from 'react-spinners/HashLoader';
 import { Link, useParams, useLocation } from 'react-router-dom';
+import { setCurrentPage } from '../slices/blogSlice';
 
 export default function Blog() {
   const dispatch = useDispatch();
-  const { id } = useParams();
   const location = useLocation();
-  
-  const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 10;
-
-  const { blogData, loading, error } = useSelector((state) => state.blog);
+  const {currentPage, blogData, loading, error } = useSelector((state) => state.blog);
   
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const page = parseInt(params.get('page')) || 1; 
-    setCurrentPage(page);
+  dispatch(setCurrentPage(page));
   }, [location.search]);
 
   useEffect(() => {
     dispatch(fetchBlog());
   }, [dispatch]);
 
+
+  
   if (loading) {
     return (
       <div className='h-[100vh] flex justify-center items-center'>
@@ -46,7 +46,7 @@ export default function Blog() {
   const totalPages = Math.ceil(blogData.length / postsPerPage);
 
   const handlePageChange = (page) => {
-    setCurrentPage(page);
+   dispatch(setCurrentPage(page));
     window.history.pushState({}, '', `?page=${page}`); 
   };
 
@@ -66,15 +66,42 @@ export default function Blog() {
 
       <div className='mt-4 flex justify-center'>
         {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={`mx-1 px-4 py-2 border rounded ${
-              currentPage === index + 1 ? 'bg-cyan-500 text-white' : 'bg-white text-cyan-500'
-            }`}
-          >
-            {index + 1}
-          </button>
+
+          /* From Uiverse.io by omriluz */ 
+<button
+ key={index + 1}
+   onClick={() => handlePageChange(index + 1)}
+   className={`button mx-1 px-4 py-2 border rounded ${
+     currentPage === index + 1 ? 'bg-cyan-800 text-gray-700' : 'bg-white text-cyan-500'
+   }`}
+>
+  <div class="bloom-container">
+    <div class={`button-container-main ${ currentPage === index + 1 ? "bg-pink-500" : "" }`}>
+      <div class="button-inner">
+        <div class="back "></div>
+        <div class="front">
+        {index + 1}
+        </div>
+      </div>
+      <div class="button-glass">
+        <div class="back"></div>
+        <div class="front"></div>
+      </div>
+    </div>
+    <div class="bloom bloom1"></div>
+    <div class="bloom bloom2"></div>
+  </div>
+</button>
+
+          // <button
+          //   key={index + 1}
+          //   onClick={() => handlePageChange(index + 1)}
+          //   className={`mx-1 px-4 py-2 border rounded ${
+          //     currentPage === index + 1 ? 'bg-cyan-500 text-white' : 'bg-white text-cyan-500'
+          //   }`}
+          // >
+          //   {index + 1}
+          // </button>
         ))}
       </div>
     </div>

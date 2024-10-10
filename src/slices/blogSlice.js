@@ -12,9 +12,15 @@ const blogSlice = createSlice({
     blogData:[], 
     loading:false,
     error:null,
-    singleBlog :{}
+    singleBlog :{},
+    currentPage : 1
   },
-  reducers: {},
+  reducers: {
+
+    setCurrentPage : function(state,action){
+      state.currentPage = action.payload
+    }
+  },
 
   extraReducers: (builder) => {
     builder
@@ -46,7 +52,7 @@ const blogSlice = createSlice({
   
 })
 
-// export const { incremented, decremented } = cartSlice.actions
+export const { setCurrentPage } = blogSlice.actions
 export default blogSlice.reducer
 
 
