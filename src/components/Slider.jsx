@@ -1,27 +1,69 @@
-import React from 'react'
-import { Carousel } from "@material-tailwind/react";
+import React, { useEffect, useState } from 'react';
+import image1 from '../Assests/Image1.webp'
+import image2 from '../Assests/Image4.jpg'
+import image3 from '../Assests/Images6.png'
 
-const Slider = () => {
+const Carousel = () => {
+  const items = [
+    {
+    
+      text: 'Data to enrich your online business 1',
+      bgImage: image1,
+    },
+    {
+     
+      text: 'Data to enrich your online business 2',
+      bgImage: image2,
+    },
+    {
+     
+      text: 'Data to enrich your online business 3',
+      bgImage: image3,
+    },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+    }, 5000); 
+
+    return () => clearInterval(intervalId); 
+  }, [items.length]);
+
   return (
-    <Carousel className="rounded-xl h-96 w-full">
-      <img
-        src="https://plus.unsplash.com/premium_photo-1683798464819-d1376249293e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGUlMjBjb21tZXJjZXxlbnwwfHwwfHx8MA%3D%3D"
-        alt="image 1"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c2hvcHBpbmd8ZW58MHx8MHx8fDA%3D"
-        alt="image 2"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://media.istockphoto.com/id/1067203316/photo/woman-hand-hold-shopping-cart-with-abstract-blur-supermarket-aisle-background.webp?a=1&b=1&s=612x612&w=0&k=20&c=H-DqPeTUQezhg95sVfX1OlA_QYZCVZngp9zuVq_evZ4="
-        alt="image 3"
-        className="h-full w-full object-cover"
-      />
-    </Carousel>
-  )
-}
+    <div
+      className="bg-white"
+      style={{
+        backgroundImage: `url(${items[currentIndex].bgImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height:"800px",
+        transition: 'background-image 0.5s ease-in-out', 
+      }}
+    >
+      <div className="lg:hidden" role="dialog" aria-modal="true">
+      </div>
+      <div className="relative isolate px-6 pt-14 lg:px-8">
+        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+          <div className="text-center">
+            {/* <h1 className="text-balance text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+              {items[currentIndex].text}
+            </h1> */}
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              {/* <a href="#" className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                Get started
+              </a>
+              <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                Learn more <span aria-hidden="true">→</span>
+              </a> */}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default Slider
- 
+export default Carousel;
