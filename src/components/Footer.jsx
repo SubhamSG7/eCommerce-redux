@@ -9,34 +9,30 @@ export default function Footer() {
             <nav className="flex flex-wrap justify-center -mx-5 -my-2">
                 <div className="px-5 py-2">
                     <Link to="/" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                        About
+                        Home
                    </Link>
                 </div>
                 <div className="px-5 py-2">
-                    <Link to="/" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                        Blog
+                    <Link to="/products" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                        Products
                    </Link>
                 </div>
                 <div className="px-5 py-2">
-                    <Link to="/" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                        Team
+                    <Link to="/cart" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                       Cart
                    </Link>
                 </div>
                 <div className="px-5 py-2">
-                    <Link to="/" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                        Pricing
+                    <Link to="/blog" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                        Blog's
                    </Link>
                 </div>
                 <div className="px-5 py-2">
-                    <Link to="/" className="text-base leading-6 text-gray-500 hover:text-gray-900">
+                    <Link to="/contact" className="text-base leading-6 text-gray-500 hover:text-gray-900">
                         Contact
                    </Link>
                 </div>
-                <div className="px-5 py-2">
-                    <Link to="/" className="text-base leading-6 text-gray-500 hover:text-gray-900">
-                        Terms
-                   </Link>
-                </div>
+              
             </nav>
             <div className="flex justify-center mt-8 space-x-6">
                 <Link to="/" className="text-gray-400 hover:text-gray-500">
