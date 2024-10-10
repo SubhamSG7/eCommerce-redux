@@ -6,8 +6,23 @@ import { currencyChange } from '../slices/currencySlice';
 import { fetchCurrency } from '../actions/actions';
 import HashLoader from "react-spinners/HashLoader";
 import {updateCart} from "../slices/cartslice"
+import Cookies from "js-cookie";
+import { getLoggedUser, setLoggedUser } from '../slices/userSlice';
 
 const Navbar = () => {
+  const dispatch=useDispatch()
+  const cookieData=Cookies.get("token");
+  const loggedUser=useSelector(getLoggedUser);
+
+  if(cookieData){
+    const user=JSON.parse(cookieData);
+    dispatch(setLoggedUser(user.name))
+  }
+  else {
+    dispatch(setLoggedUser(null))
+  }
+
+  
   const navigate = useNavigate();
   const [nav, setNav] = useState(false);
 
@@ -24,7 +39,7 @@ const {cartData} = useSelector((state)=>state.cart)
     { id: 2, text: `Cart (${cartData ? cartData.length : 0})`, nav: "/cart" },
     { id: 3, text: 'Blog', nav: "/blog" },
     { id: 4, text: 'Contact', nav: "/contact" },
-    { id: 5, text: 'Login', nav: "/login" },
+    { id: 5, text: loggedUser?"profile":'Login', nav: loggedUser?"/profile":"/login" },
  
   ];
 
@@ -33,7 +48,6 @@ const {cartData} = useSelector((state)=>state.cart)
     setNav(false);
   };
 
-const dispatch = useDispatch();
 
 
 const {currencyData,error,loading} = useSelector((state)=>state.currency);

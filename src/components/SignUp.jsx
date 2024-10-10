@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { emailHandler, getCredentials, getEmail, getName, getPassword, getValidate, nameHandler, passHandler, setCredentials, validation } from '../slices/userSlice';
 import { Link, useNavigate } from "react-router-dom";
 import { firebaseConfig } from '../firebase-Config/FirebaseConfig';
+import bcrypt from "bcryptjs-react";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -22,10 +23,12 @@ function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    const salt = bcrypt.genSaltSync(10)
     dispatch(validation({ type: "signin" }));
 
     if (validate.length === 0 && name.length > 3 && password.length > 6 && email.length > 4) {
       try {
+        const hashedPassword = bcrypt.hashSync(password, '$2a$10$CwTycUXWue0Thq9StjUM0u') 
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user=userCredential.user
         await set(ref(db, "Users/" + user.uid), {
