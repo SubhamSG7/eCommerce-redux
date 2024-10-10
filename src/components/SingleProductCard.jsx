@@ -47,7 +47,7 @@ export default function SingleProductCard({ item }) {
             <ButtonPlusMinus item={item} />
           ) : data ? (
             <button className="px-6 py-2 text-white bg-red-900 rounded" disabled>
-              Already Added into Cart
+              Added into Cart
             </button>
           ) : (
             <button

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearDetails,
@@ -29,9 +29,14 @@ function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.state;
+
+  // State for error messages
+  const [errorMessage, setErrorMessage] = useState("");
+
   async function handleLogin(e) {
     e.preventDefault();
     dispatch(validation({ type: "login" }));
+    
     if (validate.length === 0 && email.length > 4 && password.length > 6) {
       try {
         const userCredential = await signInWithEmailAndPassword(
@@ -41,11 +46,13 @@ function Login() {
         );
         const user = userCredential.user;
         const token = await user.getIdToken();
+        
         if (token) {
           dispatch(clearDetails());
           dispatch(setCredentials(""));
           const userRef = ref(db, "Users/" + user.uid);
           const snapshot = await get(userRef);
+          
           if (snapshot.exists()) {
             const userDetails = snapshot.val();
             handleCookie("login", {
@@ -53,8 +60,7 @@ function Login() {
               name: userDetails.name,
               email: userDetails.email,
             });
-            console.log(path);
-            
+
             if (path === "/cart/checkout") {
               navigate("/cart");
             } else {
@@ -62,6 +68,7 @@ function Login() {
             }
           } else {
             console.error("No user data found for UID:", user.uid);
+            setErrorMessage("No user data found.");
             dispatch(setCredentials("No user data found"));
           }
         } else {
@@ -70,16 +77,16 @@ function Login() {
       } catch (error) {
         console.error("Login error:", error.message);
         let errorMessage = "Invalid Credentials. Please try again.";
+        setErrorMessage(errorMessage);
         dispatch(setCredentials(errorMessage));
       }
+    } else {
+      setErrorMessage("Please enter valid email and password.");
     }
   }
+
   return (
     <>
-      {/* {console.log(credentials)}
-      {console.log(validate)} */}
-        {/* {use this for alert} */}
-   
       <form
         onSubmit={handleLogin}
         className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8"
@@ -91,6 +98,11 @@ function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          {errorMessage && (
+            <div className="text-red-500 text-center mb-4">
+              {errorMessage}
+            </div>
+          )}
           <div>
             <label
               htmlFor="email"
@@ -128,7 +140,7 @@ function Login() {
                 required
                 onChange={(e) => dispatch(passHandler(e.target.value))}
                 value={password}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 mb-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -136,7 +148,7 @@ function Login() {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-cyan-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+              className="flex w-full justify-center rounded-md bg-slate-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
             >
               Sign in
             </button>
@@ -146,7 +158,7 @@ function Login() {
             Access to user
             <Link
               to="/signUp"
-              className="font-semibold leading-6 text-cyan-600 hover:text-cyan-500 ml-2"
+              className="font-semibold leading-6 text-slate-600 hover:text-cyan-500 ml-2"
             >
               Sign Up
             </Link>
